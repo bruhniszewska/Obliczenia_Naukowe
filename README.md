@@ -7,7 +7,7 @@ Projekt podzielony jest na dwa główne nurty badawcze:
 ### Nurt 1: Przestrzenny Automat Komórkowy (Symulacja i Kalibracja RK4)
 Główna część aplikacji umożliwia badanie wpływu przestrzeni (w tym bariery w postaci rzeki) na dynamikę populacji.
 * Kompletny kod symulatora, algorytmów przestrzennych oraz interfejsu GUI znajduje się wewnątrz pliku **`symulator.ipynb`**.
-* Wygenerowane przez automat serie czasowe są bezpośrednio wewnątrz notebooka przekazywane do modułu kalibracyjnego. Moduł ten za pomocą napisanego od zera algorytmu Rungego-Kutty (RK4) przeprowadza próby dopasowania teoretycznego układu równań różniczkowych (dla różnych zestawów parametrów oraz z wykorzystaniem optymalizatora BFGS) do stochastycznych danych z siatki. Wszystkie testy zostały przeprowadzone przy pełnej przepuszczalności rzeki w celu bezpośredniej weryfikacji modeli.
+* Wygenerowane przez automat serie czasowe są bezpośrednio wewnątrz notebooka przekazywane do modułu kalibracyjnego. Moduł ten za pomocą napisanego od zera algorytmu Rungego-Kutty (RK4) przeprowadza próby dopasowania teoretycznego układu równań różniczkowych do stochastycznych danych z siatki. 
 
 ### Nurt 2: Kalibracja Modeli Teoretycznych na Danych Rzeczywistych (Isle Royale)
 W repozytorium znajdują się osobne skrypty analityczne, które służą do walidacji klasycznych modeli ekologicznych na podstawie rzeczywistych, trwających kilkadziesiąt lat pomiarów populacji wilków i łosi na wyspie Isle Royale (`isle-royale.csv`):

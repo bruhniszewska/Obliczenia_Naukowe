@@ -6,8 +6,8 @@ Projekt podzielony jest na dwa główne nurty badawcze:
 
 ### Nurt 1: Przestrzenny Automat Komórkowy (Symulacja i Kalibracja RK4)
 Główna część aplikacji umożliwia badanie wpływu przestrzeni (w tym bariery w postaci rzeki) na dynamikę populacji.
-* Stan siatki (`struktury.jl`, `logika_symulacji.jl`) jest wizualizowany w czasie rzeczywistym.
-* Wygenerowane przez automat serie czasowe są następnie przekazywane do modułu optymalizacyjnego (`kalibracja.jl`), który metodą Rungego-Kutty (RK4) próbuje dopasować teoretyczny układ równań różniczkowych do zachowania populacji na siatce.
+* Kompletny kod symulatora, algorytmów przestrzennych oraz interfejsu GUI znajduje się wewnątrz pliku **`symulator.ipynb`**.
+* Wygenerowane przez automat serie czasowe są bezpośrednio wewnątrz notebooka przekazywane do modułu kalibracyjnego. Moduł ten za pomocą napisanego od zera algorytmu Rungego-Kutty (RK4) przeprowadza próby dopasowania teoretycznego układu równań różniczkowych (dla różnych zestawów parametrów oraz z wykorzystaniem optymalizatora BFGS) do stochastycznych danych z siatki. Wszystkie testy zostały przeprowadzone przy pełnej przepuszczalności rzeki w celu bezpośredniej weryfikacji modeli.
 
 ### Nurt 2: Kalibracja Modeli Teoretycznych na Danych Rzeczywistych (Isle Royale)
 W repozytorium znajdują się osobne skrypty analityczne, które służą do walidacji klasycznych modeli ekologicznych na podstawie rzeczywistych, trwających kilkadziesiąt lat pomiarów populacji wilków i łosi na wyspie Isle Royale (`isle-royale.csv`):
@@ -17,15 +17,12 @@ W repozytorium znajdują się osobne skrypty analityczne, które służą do wal
 
 ## Struktura Projektu
 
-Projekt został podzielony modułowo, oddzielając logikę obliczeniową od warstwy prezentacji:
+Po optymalizacji pod kątem niezawodności i łatwości uruchomienia przez użytkownika, projekt składa się z następujących plików:
 
-* **`struktury.jl`** – Definicje struktur danych (`GridState` oraz `SimParams`), przechowujące stan siatki i parametry symulacji.
-* **`logika_symulacji.jl`** – Główny algorytm automatu komórkowego (dynamika lokalna populacji, interakcje, migracja przez rzekę).
-* **`kalibracja.jl`** – Kod odpowiedzialny za dopasowanie parametrów teoretycznych modeli ciągłych do danych wygenerowanych przez symulator (RK4 + algorytm optymalizacyjny) oraz generowanie wykresów porównawczych.
 * **`Lotka-Volterra.jl`** – Skrypt optymalizacyjny dla klasycznego modelu dopasowywanego do danych rzeczywistych.
 * **`Rosenzweig-MacArthur.jl`** – Skrypt optymalizacyjny dla zaawansowanego modelu dopasowywanego do danych rzeczywistych.
 * **`isle-royale.csv`** – Historyczna baza danych populacji łosi i wilków z wyspy Isle Royale.
-* **`symulator.ipynb`** – Główny plik Jupyter Notebook stanowiący interaktywny pulpit sterowniczy (GUI) oparty na bibliotece `GLMakie`.
+* **`symulator.ipynb`** – Główny plik projektu stanowiący kompletne środowisko badawcze. Zawiera definicje struktur danych, pełną logikę automatu komórkowego, algorytm RK4, funkcje kalibracyjne oraz interaktywny pulpit sterowniczy (GUI) oparty na bibliotece `GLMakie` i `Plots`.
 * **`Project.toml` & `Manifest.toml`** – Pliki środowiska Julii, gwarantujące zgodność wersji bibliotek (`GLMakie`, `Plots`, `BenchmarkTools`, itp.).
 
 ## Instrukcja Instalacji i Przygotowania Środowiska
